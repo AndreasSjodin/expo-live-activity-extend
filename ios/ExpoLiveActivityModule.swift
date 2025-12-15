@@ -44,7 +44,7 @@ public class ExpoLiveActivityModule: Module {
         } else if let stringValue = value as? String {
           return .string(stringValue)
         }
-        throw ConversionException(stringValue: String(describing: value))
+        throw ConversionException(String(describing: value))
       }
 
       func toLiveActivityValue() -> LiveActivityAttributes.CustomFieldValue {
