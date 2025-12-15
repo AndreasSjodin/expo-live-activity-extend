@@ -1,3 +1,5 @@
+import Foundation
+
 func resolveImage(from string: String) async throws -> String {
   if let url = URL(string: string), url.scheme?.hasPrefix("http") == true,
      let container = FileManager.default.containerURL(
