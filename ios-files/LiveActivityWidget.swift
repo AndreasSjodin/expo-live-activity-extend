@@ -194,7 +194,7 @@ public struct LiveActivityWidget: Widget {
       let renderer = DIRenderer(state: context.state, attributes: context.attributes)
       let dslConfig = context.attributes.decodeDynamicIslandConfig()
 
-      DynamicIsland {
+      return DynamicIsland {
         // MARK: - Expanded Leading
         DynamicIslandExpandedRegion(.leading, priority: dslConfig?.expanded?.leadingPriority ?? 1) {
           if let content = dslConfig?.expanded?.leading {
