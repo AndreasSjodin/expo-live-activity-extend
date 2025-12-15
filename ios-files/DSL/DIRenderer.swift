@@ -1,5 +1,6 @@
 import SwiftUI
 import WidgetKit
+import AppIntents
 
 /// Renders Dynamic Island DSL elements into SwiftUI views
 @available(iOS 16.1, *)
@@ -330,9 +331,6 @@ public struct DIRenderer {
 }
 
 // MARK: - Button Intent (iOS 17+)
-
-@available(iOS 17.0, *)
-import AppIntents
 
 @available(iOS 17.0, *)
 public struct DIButtonIntent: AppIntent {
