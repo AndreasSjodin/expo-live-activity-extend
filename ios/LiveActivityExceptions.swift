@@ -23,3 +23,9 @@ final class UnexpectedErrorException: GenericException<Error> {
     "An unexpected error occurred: \(param.localizedDescription)"
   }
 }
+
+final class ConversionException: GenericException<String> {
+  override var reason: String {
+    "Cannot convert value '\(param)' to a supported custom field type (String, Double, Bool)"
+  }
+}
