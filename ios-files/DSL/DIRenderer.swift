@@ -77,7 +77,7 @@ public struct DIRenderer {
         .foregroundStyle(
           element.color.flatMap { Color(hex: $0) } ?? .primary,
           element.secondaryColor.flatMap { Color(hex: $0) } ?? .secondary,
-          element.tertiaryColor.flatMap { Color(hex: $0) } ?? .tertiary
+          element.tertiaryColor.flatMap { Color(hex: $0) } ?? Color.gray.opacity(0.5)
         )
     } else {
       sizedImage
@@ -201,11 +201,19 @@ public struct DIRenderer {
   private func renderButton(_ element: DIButton) -> some View {
     // Buttons require iOS 17+ for Live Activity interactivity
     if #available(iOS 17.0, *) {
-      Button(intent: DIButtonIntent(buttonId: element.id)) {
+      let button = Button(intent: DIButtonIntent(buttonId: element.id)) {
         renderButtonLabel(element.label)
       }
-      .buttonStyle(mapButtonStyle(element.style))
       .tint(element.tint.flatMap { Color(hex: $0) })
+
+      switch element.style {
+      case .bordered:
+        button.buttonStyle(.bordered)
+      case .borderedProminent:
+        button.buttonStyle(.borderedProminent)
+      case .plain, .none:
+        button.buttonStyle(.plain)
+      }
     }
     // On iOS 16, buttons simply don't render (graceful degradation)
   }
@@ -217,17 +225,6 @@ public struct DIRenderer {
       Text(text)
     case .symbol(let symbol):
       renderSFSymbol(symbol)
-    }
-  }
-
-  private func mapButtonStyle(_ style: DIButtonStyle?) -> some PrimitiveButtonStyle {
-    switch style {
-    case .bordered:
-      return .bordered
-    case .borderedProminent:
-      return .borderedProminent
-    case .plain, .none:
-      return .plain
     }
   }
 
